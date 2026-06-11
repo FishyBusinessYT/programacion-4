@@ -24,7 +24,10 @@ public class Bullet : MonoBehaviour
 
     void OnCollisionEnter2D(Collision2D coll)
     {
-        Destroy(coll.gameObject);
-        Destroy(gameObject);
+        if (coll.gameObject.name == "Enemy(Clone)")
+        {
+            Destroy(coll.gameObject);
+            Destroy(gameObject);
+        }
     }
 }

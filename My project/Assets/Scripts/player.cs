@@ -1,19 +1,20 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.InputSystem.LowLevel;
-using UnityEngine.UI;
 
 public class Player: MonoBehaviour
 {
     private Vector3 mousePos;
     private float timer;
     private bool canFire = false;
+    public GameManager manager;
     public GameObject bullet;
     public Transform bulletTransform;
     public float shotDelay;
-    void Start()
-    {}
 
+    void Start()
+    {
+        manager = FindAnyObjectByType<GameManager>();
+    }
     void Update()
     {
         float mouseX = Mouse.current.position.x.ReadValue();
@@ -34,5 +35,9 @@ public class Player: MonoBehaviour
             timer = 0;
             Instantiate(bullet, bulletTransform.position, Quaternion.identity);
         }
+    }
+    void OnDestroy()
+    {
+        manager.PlayerKilled();
     }
 }
