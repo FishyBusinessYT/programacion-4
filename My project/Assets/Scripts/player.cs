@@ -11,6 +11,10 @@ public class Player: MonoBehaviour
     public Transform bulletTransform;
     public float shotDelay;
 
+    public AudioSource source;
+    public AudioClip clip;
+    public Volume volume;
+
     void Start()
     {
         manager = FindAnyObjectByType<GameManager>();
@@ -34,6 +38,8 @@ public class Player: MonoBehaviour
             canFire = false;
             timer = 0;
             Instantiate(bullet, bulletTransform.position, Quaternion.identity);
+
+            source.PlayOneShot(clip, volume.volume);
         }
     }
     void OnDestroy()
